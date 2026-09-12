@@ -1,0 +1,60 @@
+{
+  "name": "ReportAccess",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Base44 user id this access record belongs to"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email of the user (denormalized for display)"
+    },
+    "allowed_reports": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Report keys the user may run, e.g. general_ledger, trial_balance"
+    },
+    "allowed_companies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Company codes the user may report on"
+    }
+  },
+  "required": [
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

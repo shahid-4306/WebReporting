@@ -1,0 +1,38 @@
+{
+  "properties": {
+    "role": {
+      "type": "string",
+      "description": "The role of the user in the app",
+      "enum": [
+        "admin",
+        "user"
+      ]
+    }
+  },
+  "required": [
+    "role"
+  ],
+  "name": "User",
+  "type": "object",
+  "rls": {
+    // Without an rls block, Base44 treats the entity as fully open: any
+    // authenticated user could list every account (email, role, ...) and
+    // could call User.update on any id — including their own — to grant
+    // themselves the "admin" role. Restrict all direct entity access to
+    // admins; every user's own identity/role is served instead through the
+    // dedicated db.auth.me() session call used across the app, which is
+    // not affected by this rule.
+    "read": {
+      "user_condition": { "role": "admin" }
+    },
+    "create": {
+      "user_condition": { "role": "admin" }
+    },
+    "update": {
+      "user_condition": { "role": "admin" }
+    },
+    "delete": {
+      "user_condition": { "role": "admin" }
+    }
+  }
+}

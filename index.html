@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/image.png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>Sonex Insight ERP</title>
+    <script>
+      (function () {
+        try {
+          var t = JSON.parse(localStorage.getItem("erp-theme")) || {
+            mode: "light",
+            accent: "slate",
+          };
+          var accents = {
+            slate: {
+              p: "0 0% 9%",
+              pf: "0 0% 98%",
+              r: "0 0% 9%",
+              sp: "240 5.9% 10%",
+            },
+            blue: {
+              p: "221 83% 53%",
+              pf: "0 0% 100%",
+              r: "221 83% 53%",
+              sp: "221 83% 53%",
+            },
+            green: {
+              p: "142 71% 45%",
+              pf: "0 0% 100%",
+              r: "142 71% 45%",
+              sp: "142 71% 45%",
+            },
+            purple: {
+              p: "263 70% 50%",
+              pf: "0 0% 100%",
+              r: "263 70% 50%",
+              sp: "263 70% 50%",
+            },
+            orange: {
+              p: "24 95% 53%",
+              pf: "0 0% 100%",
+              r: "24 95% 53%",
+              sp: "24 95% 53%",
+            },
+            rose: {
+              p: "347 77% 50%",
+              pf: "0 0% 100%",
+              r: "347 77% 50%",
+              sp: "347 77% 50%",
+            },
+          };
+          var a = accents[t.accent] || accents.slate;
+          var root = document.documentElement;
+          if (t.mode === "dark") root.classList.add("dark");
+          root.style.setProperty("--primary", a.p);
+          root.style.setProperty("--primary-foreground", a.pf);
+          root.style.setProperty("--ring", a.r);
+          root.style.setProperty("--sidebar-primary", a.sp);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

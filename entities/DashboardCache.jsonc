@@ -1,0 +1,76 @@
+{
+  "name": "DashboardCache",
+  "type": "object",
+  "properties": {
+    "company_code": {
+      "type": "string",
+      "description": "Company code this cache entry belongs to"
+    },
+    "cost_center": {
+      "type": "string",
+      "description": "Cost center filter (ALL or a specific code)"
+    },
+    "date_from": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date of the cached period"
+    },
+    "date_to": {
+      "type": "string",
+      "format": "date",
+      "description": "End date of the cached period"
+    },
+    "summary": {
+      "type": "object",
+      "description": "Cached KPI summary (sales, purchases, AR, AP)"
+    },
+    "trend": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "description": "Cached monthly sales/purchase trend rows"
+    },
+    "daily_trend": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "description": "Cached daily sales/purchase trend rows"
+    },
+    "top_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "description": "Cached top selling items rows"
+    },
+    "customer_sales": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "description": "Cached top customer sales rows"
+    }
+  },
+  "required": [
+    "company_code",
+    "date_from",
+    "date_to"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}
